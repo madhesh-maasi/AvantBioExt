@@ -1,0 +1,29 @@
+{
+    "$schema": "https://developer.microsoft.com/json-schemas/core-build/serve.schema.json",
+    "port": 4321,
+    "https": true,
+    "serveConfigurations": {
+        "default": {
+            "pageUrl": "https://chandrudemo.sharepoint.com/sites/Avantbio2",
+            "customActions": {
+                "09e959e7-a2ae-44de-a4ab-9edf9f89e62a": {
+                    "location": "ClientSideExtension.ApplicationCustomizer",
+                    "properties": {
+                        "testMessage": "Test message"
+                    }
+                }
+            }
+        },
+        "userChecker": {
+            "pageUrl": "https://chandrudemo.sharepoint.com/sites/Avantbio2",
+            "customActions": {
+                "09e959e7-a2ae-44de-a4ab-9edf9f89e62a": {
+                    "location": "ClientSideExtension.ApplicationCustomizer",
+                    "properties": {
+                        "testMessage": "Test message"
+                    }
+                }
+            }
+        }
+    }
+}

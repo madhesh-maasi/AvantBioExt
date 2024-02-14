@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+    <CustomAction
+        Title="UserChecker"
+        Location="ClientSideExtension.ApplicationCustomizer"
+        ClientSideComponentId="09e959e7-a2ae-44de-a4ab-9edf9f89e62a"
+        ClientSideComponentProperties="{&quot;testMessage&quot;:&quot;Test message&quot;}">
+    </CustomAction>
+</Elements>

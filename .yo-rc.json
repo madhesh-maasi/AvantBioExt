@@ -1,0 +1,17 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "version": "1.14.0",
+    "libraryName": "avant-bio-ext",
+    "libraryId": "1f54fece-4040-41e7-828c-d2307da4de3b",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "avant-bio-ext",
+    "solutionShortDescription": "avant-bio-ext description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "extension",
+    "extensionType": "ApplicationCustomizer"
+  }
+}
