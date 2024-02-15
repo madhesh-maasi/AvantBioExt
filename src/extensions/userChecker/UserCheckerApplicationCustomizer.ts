@@ -1,45 +1,24 @@
+import React from "react";
+import * as ReactDom from "react-dom";
 import { Log } from "@microsoft/sp-core-library";
-import { BaseApplicationCustomizer } from "@microsoft/sp-application-base";
+import {
+  BaseApplicationCustomizer,
+  PlaceholderName,
+} from "@microsoft/sp-application-base";
 import { Dialog } from "@microsoft/sp-dialog";
 import { sp } from "@pnp/sp/presets/all";
 import * as strings from "UserCheckerApplicationCustomizerStrings";
+import MainComponent from "./MainComponent";
 
 const LOG_SOURCE: string = "UserCheckerApplicationCustomizer";
 
-/**
- * If your command set uses the ClientSideComponentProperties JSON input,
- * it will be deserialized into the BaseExtension.properties object.
- * You can define an interface to describe it.
- */
+let IsMailDatas = []
+
 export interface IUserCheckerApplicationCustomizerProperties {
-  // This is an example; replace with your own property
   testMessage: string;
 }
 
-/** A Custom Action which can be run during execution of a Client Side Application */
 export default class UserCheckerApplicationCustomizer extends BaseApplicationCustomizer<IUserCheckerApplicationCustomizerProperties> {
-  // public onInit(): Promise<void> {
-  //   Log.info(LOG_SOURCE, `Initialized ${strings.Title}`);
-
-  //   debugger;
-  //   sp.web.currentUser
-  //     .get()
-  //     .then((res) => {
-  //       debugger;
-  //       console.log(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  //   let message: string = this.properties.testMessage;
-  //   if (!message) {
-  //     message = "(No properties were provided.)";
-  //   }
-
-  //   Dialog.alert(`Hello from ${strings.Title}:\n\n${message}`);
-
-  //   return Promise.resolve();
-  // }
   public onInit(): Promise<void> {
     return super.onInit().then(() => {
       sp.setup({
@@ -47,19 +26,38 @@ export default class UserCheckerApplicationCustomizer extends BaseApplicationCus
       });
 
       this.getListItems();
-      //  return Promise.resolve();
     });
   }
-  async getListItems() {
-    await sp.web.currentUser
+  getListItems() {
+    const placeholder = this.context.placeholderProvider.tryCreateContent(
+      PlaceholderName.Top
+    );
+     sp.web.currentUser
       .get()
       .then(async (res) => {
-        console.log(res);
-        await sp.web.lists
+         console.log(res);
+        let userEmail  =res && res.Email ? res.Email:"";
+        let UserPrincipalName = res &&res.UserPrincipalName ? res.UserPrincipalName:"";
+         sp.web.lists
           .getByTitle("ExternalUser")
-          .items.get()
+          .items.filter("Title eq '" + userEmail + "'").get()
           .then((result) => {
-            console.log(result);
+            console.log('result',result)
+            let isOpen = false;
+          
+            if(UserPrincipalName && UserPrincipalName.toLowerCase().includes("#ext#") && !result.length){
+              isOpen = true
+            }
+            //console.log(result);
+            let data = {
+              UserPrincipalName,userEmail,isOpen
+            }
+            const element: React.ReactElement = React.createElement(
+              MainComponent,
+              data
+            );
+
+          return  ReactDom.render(element, placeholder.domElement);
           });
       })
       .catch((err) => console.log(err));
