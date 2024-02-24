@@ -39,20 +39,21 @@ export default class UserCheckerApplicationCustomizer extends BaseApplicationCus
         let userEmail = res && res.Email ? res.Email : "";
         let UserPrincipalName =
           res && res.UserPrincipalName ? res.UserPrincipalName : "";
-        //  sp.web.lists
-        //   .getByTitle("ExternalUser")
-        //   .items.filter("Title eq '" + userEmail + "'").get()
-        //   .then((result) => {
-        //     console.log('result',result)
+
         let isOpen = false;
+
+        let url = "https://chandrudemo.sharepoint.com/sites/Avantbio2";
+        let currUrl = location.href;
+        console.log("currUrl", currUrl);
 
         if (
           UserPrincipalName &&
-          UserPrincipalName.toLowerCase().includes("#ext#")
+          UserPrincipalName.toLowerCase().includes("#ext#") &&
+          url.toLowerCase() === currUrl.toLowerCase()
         ) {
           isOpen = true;
         }
-        //console.log(result);
+
         let data = {
           UserPrincipalName,
           userEmail,
@@ -64,7 +65,6 @@ export default class UserCheckerApplicationCustomizer extends BaseApplicationCus
         );
 
         return ReactDom.render(element, placeholder.domElement);
-        //});
       })
       .catch((err) => console.log(err));
   }
