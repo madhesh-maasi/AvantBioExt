@@ -15,6 +15,7 @@ const MainComponent = (props: any) => {
 
   useEffect(() => {
      setIsopen(props.isOpen);
+    // setIsopen(true)
   }, []);
 
   return (

@@ -42,14 +42,16 @@ export default class UserCheckerApplicationCustomizer extends BaseApplicationCus
 
         let isOpen = false;
 
-        let url = this.context.pageContext.web.absoluteUrl
+        let url = window.location.href
         let currUrl = location.href;
+        console.log(url);
+        console.log(currUrl);
+        
       
 
         if (
           UserPrincipalName &&
-          UserPrincipalName.toLowerCase().includes("#ext#") &&
-          url.toLowerCase() === currUrl.toLowerCase()
+          UserPrincipalName.toLowerCase().includes("#ext#") && url.toLowerCase().includes("default.aspx")
         ) {
           isOpen = true;
         }
