@@ -5,10 +5,7 @@ import { sp } from "@pnp/sp/presets/all";
 const MainComponent = (props: any) => {
   const [isopen, setIsopen] = useState(false);
   const [isConfirmed,setIsConfirmed]= useState(false)
-  // function onback() {
-  //   setIsopen(false);
-  //   history.back();
-  // }
+
 
   function adddetails() {
    
@@ -17,7 +14,7 @@ const MainComponent = (props: any) => {
   }
 
   useEffect(() => {
-    setIsopen(props.isOpen);
+     setIsopen(props.isOpen);
   }, []);
 
   return (

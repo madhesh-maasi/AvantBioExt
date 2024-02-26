@@ -42,9 +42,9 @@ export default class UserCheckerApplicationCustomizer extends BaseApplicationCus
 
         let isOpen = false;
 
-        let url = "https://chandrudemo.sharepoint.com/sites/Avantbio2";
+        let url = this.context.pageContext.web.absoluteUrl
         let currUrl = location.href;
-        console.log("currUrl", currUrl);
+      
 
         if (
           UserPrincipalName &&
